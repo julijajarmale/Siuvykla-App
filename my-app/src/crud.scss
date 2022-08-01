@@ -24,6 +24,9 @@
     }
   }
 
+
+
+  
   .modal {
     width: 40%;
     padding: 70px;
@@ -73,7 +76,7 @@
       text-align: center;
       font-weight: 700;
       line-height: 40px;
-      color: #7379ea;
+      color: #f34091;
     }
 
     form-row {
@@ -121,6 +124,38 @@
     touch-action: manipulation;
   }
 
+  
+
+  .login-container {
+    background-color: #f6f7f9;
+    height: 100vh;
+    h2{
+      margin-bottom: 20px;
+    }
+    .login-form {
+      display: grid;
+      margin-left: calc(50% - 250px);
+      width: 500px;
+      padding: 25px 40px 50px;
+      background-color: white;
+      border-radius: 10px;
+      color: #404040;
+    }
+    .input {
+      padding: 12px 16px;
+      border-radius: 5px;
+      width: 100%;
+      border: none;
+      background-color: #f6f7f9;
+      outline-style: none;
+      margin-bottom: 20px;
+    }
+    .buttons {
+      width: 100%;
+      
+    }
+    
+  }
   .list-container {
     box-shadow: 0 4px 10px #0003;
   
@@ -134,7 +169,7 @@
         text-align: center;
         font-weight: 700;
         line-height: 40px;
-        color: #7379ea;
+        color: #f34091;
         font-size: 25px;
       }
       .list-group {
@@ -147,7 +182,7 @@
           line-height: 40px;
           border: 1px;
           border-style: solid;
-          border-color: rgb(228, 229, 252);
+          border-color: rgb(249, 192, 230);
           background-color: white;
           border-radius: 5px;
           padding: 10px;
@@ -173,10 +208,10 @@
           align-items: center;
           background-color: white;
           border: 1;
-          border-color: #f34091;
+          border-color: #f34091 ;
           border-radius: 5px;
           box-sizing: border-box;
-          color: #f6fc4d;
+          color: #fc4d79;
           cursor: pointer;
           display: flex;
           flex-direction: column;
@@ -201,7 +236,7 @@
   
       .btn3 {
         align-items: center;
-        background-image: linear-gradient(135deg, #4f40f3 40%, #4db6fc);;
+        background-image: linear-gradient(135deg, #f34091  40%, #fcf94d);;
         border: 0;
         border-radius: 5px;
         box-sizing: border-box;
@@ -291,36 +326,5 @@
       -webkit-user-select: none;
       touch-action: manipulation;
     }
-  }
-
-  .login-container {
-    background-color: #f6f7f9;
-    height: 100vh;
-    h2{
-      margin-bottom: 20px;
-    }
-    .login-form {
-      display: grid;
-      margin-left: calc(50% - 250px);
-      width: 500px;
-      padding: 25px 40px 50px;
-      background-color: white;
-      border-radius: 10px;
-      color: #404040;
-    }
-    .input {
-      padding: 12px 16px;
-      border-radius: 5px;
-      width: 100%;
-      border: none;
-      background-color: #f6f7f9;
-      outline-style: none;
-      margin-bottom: 20px;
-    }
-    .buttons {
-      width: 100%;
-      
-    }
-    
   }
   

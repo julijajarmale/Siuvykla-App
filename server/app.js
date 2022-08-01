@@ -3,6 +3,7 @@ const app = express()
 const port = 3003
 
 const cors = require("cors");
+app.use(express.json({ limit: '10mb' }));
 app.use(cors());
 const mysql = require("mysql");
 const md5 = require('js-md5');
@@ -116,9 +117,58 @@ app.use(doAuth)
   });
   
   
-  
-  
+  //Create Product
 
+app.post("/admin/products", (req, res) => {
+    const sql = `
+    INSERT INTO products
+    (type, picture, color, hexcolor, price)
+    VALUES (?, ?, ?, ?, ?)
+    `;
+    con.query(sql, [req.body.type, req.body.picture, req.body.color, req.body.hexColor, req.body.price], (err, result) => {
+        if (err) throw err;
+        res.send({ result, msg: { text: 'OK, new and shiny product was created', type: 'success' } });
+    });
+});
+
+// Read  Products
+app.get("/admin/products", (req, res) => {
+    const sql = `
+    SELECT *
+    FROM products
+    ORDER BY type
+`;
+    con.query(sql, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+  
+//Delete Products
+
+app.delete("/admin/products/:id", (req, res) => {
+    const sql = `
+    DELETE FROM products
+    WHERE id = ?
+    `;
+    con.query(sql, [req.params.id], (err, result) => {
+        if (err) throw err;
+        res.send({ result, msg: { text: 'OK, Cat gone', type: 'success' } });
+    });
+  });
+
+  //Edit Product
+app.put("/admin/products/:id", (req, res) => {
+    const sql = `
+    UPDATE products
+    SET type = ? , color = ?, hexcolor = ?, price = ?, picture = ?
+    WHERE id = ?
+    `;
+    con.query(sql, [req.body.type, req.body.color, req.body.hexColor, req.body.price, req.body.picture, req.params.id], (err, result) => {
+        if (err) throw err;
+        res.send({ result, msg: { text: 'OK, Cat updated. Now it is as new', type: 'success' } });
+    });
+  });
 
 
 

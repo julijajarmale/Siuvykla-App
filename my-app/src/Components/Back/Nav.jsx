@@ -17,19 +17,14 @@ function Nav() {
                             <NavLink to="/admin/products" className="nav-link" style={
                                 ({ isActive }) =>
                                     isActive ? {
-                                        color: '#f6fc4d'
-                                    } : null
-                            }>Products</NavLink>
-                            <NavLink to="/admin/cats" className="nav-link" style={
-                                ({ isActive }) =>
-                                    isActive ? {
                                         color: '#f34091'
                                     } : null
-                            }>Categories</NavLink>
+                            }>Products</NavLink>
+                    
                             <NavLink to="/" className="nav-link" style={
                                 ({ isActive }) =>
                                     isActive ? {
-                                        color: '#f6fc4d'
+                                        color: '#f34091'
                                     } : null
                             }>Main Page</NavLink>
                             <Link to="/logout">Logout</Link>
