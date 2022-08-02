@@ -89,7 +89,7 @@ const handleCreate = () => {
                     <input ref={fileInput} type="file" className="input" onChange={doPhoto}/>
                 </div>
                 {
-                    picture ? <div className="photo-bin"><img src={picture} alt="nice"/></div> : null
+                    picture ? <div className="herbas"><img src={picture} alt="nice"/></div> : null
                 }
             <button
               type="button"

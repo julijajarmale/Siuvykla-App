@@ -171,8 +171,58 @@ app.put("/admin/products/:id", (req, res) => {
   });
 
 
+  // Read  Products
+app.get("/products", (req, res) => {
+    const sql = `
+    SELECT products.type, color, hexcolor, products.price, products.picture
+    FROM products
+    ORDER BY type
+`;
+    con.query(sql, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+});
+  
+// Read FRONT ORDERS
+app.get("/orders", (req, res) => {
+    const sql = `
+    SELECT orders.size, orders.comment, products.type AS prod, products.price AS price
+  FROM orders
+  LEFT JOIN products
+  ON products.id = orders.product_id
+  
+  `;
+    con.query(sql, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+  });
 
-
+  //CREATE ORDERS FRONT
+app.post("/orders", (req, res) => {
+    const sql = `
+    INSERT INTO orders
+    (size, product_id, comment)
+    VALUES (?, ?, ?)
+    `;
+    con.query(
+      sql,
+      [
+        req.body.size,
+        req.body.product,
+        req.body.comment,
+        
+      ],
+      (err, result) => {
+        if (err) throw err;
+        res.send({
+          result,
+          msg: { text: "OK, new and shiny product was created", type: "success" },
+        });
+      }
+    );
+  });
 
 
 
