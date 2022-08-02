@@ -4,6 +4,7 @@ import Nav from './Nav';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { authConfig } from '../../Functions/auth';
+import Admin from './Admin/Admin';
 
 
 function Back({show}) {
@@ -15,6 +16,9 @@ function Back({show}) {
     const [editProduct, setEditProduct] = useState(null)
     const [modalProduct, setModalProduct] = useState(null)
 
+    const [orders, setOrders] = useState(null)
+    const [deleteOrder, setDeleteOrder] = useState(null)
+    const [approveOrder, setApproveOrder] = useState(null)
 
     //READ PRODUCTS
 useEffect(() => {
@@ -48,13 +52,45 @@ useEffect(() => {
 
 useEffect(() => {
     if (null === editProduct) return;
-    axios.put('http://localhost:3003/admin/products/' + editProduct.id, editProduct, authConfig())
+    axios.put('http://localhost:3003/admin/orders/' + editProduct.id, editProduct, authConfig())
         .then(res => {
             setLastUpdate(Date.now());
         })
        
 }, [editProduct]);
 
+//READ FRONT ORDERS
+useEffect(() => {
+    axios.get('http://localhost:3003/orders', authConfig())
+        .then(res => setOrders(res.data));
+}, [lastUpdate]);
+
+ //READ ORDERS
+ useEffect(() => {
+    axios.get('http://localhost:3003/admin/orders', authConfig())
+        .then(res => setOrders(res.data));
+}, [lastUpdate]);
+
+//DELETE ORDERS
+
+useEffect(() => {
+    if (null === deleteOrder) return;
+    axios.delete('http://localhost:3003/admin/orders/' + deleteOrder.id, authConfig())
+        .then(res => {
+            setLastUpdate(Date.now());
+        })
+    
+}, [deleteOrder]);
+//EDIT Order
+
+useEffect(() => {
+    if (null === approveOrder) return;
+    axios.put('http://localhost:3003/admin/orders/' + approveOrder.id, approveOrder, authConfig())
+        .then(res => {
+            setLastUpdate(Date.now());
+        })
+       
+}, [approveOrder]);
 
 
     return (
@@ -64,7 +100,10 @@ useEffect(() => {
             setDeleteProduct,
             setEditProduct,
             modalProduct,
-            setModalProduct
+            setModalProduct,
+            orders,
+            setDeleteOrder,
+            setApproveOrder
 
             
         }}>
@@ -73,6 +112,7 @@ useEffect(() => {
                     <>
                     
                     <Nav/>
+                    <Admin/>
                     
                    
             

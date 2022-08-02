@@ -187,7 +187,7 @@ app.get("/products", (req, res) => {
 // Read FRONT ORDERS
 app.get("/orders", (req, res) => {
     const sql = `
-    SELECT orders.size, orders.comment, products.type AS prod, products.price AS price
+    SELECT orders.size, orders.comment, products.type AS prod, products.price AS price, approved
   FROM orders
   LEFT JOIN products
   ON products.id = orders.product_id
@@ -224,8 +224,45 @@ app.post("/orders", (req, res) => {
     );
   });
 
+  // Read BACK ORDERS
+app.get("/admin/orders", (req, res) => {
+    const sql = `
+    SELECT *
+  FROM orders
+  
+  
+  `;
+    con.query(sql, (err, result) => {
+        if (err) throw err;
+        res.send(result);
+    });
+  });
 
+//Delete Orders
 
+app.delete("/admin/orders/:id", (req, res) => {
+    const sql = `
+    DELETE FROM orders
+    WHERE id = ?
+    `;
+    con.query(sql, [req.params.id], (err, result) => {
+        if (err) throw err;
+        res.send({ result, msg: { text: 'OK, Cat gone', type: 'success' } });
+    });
+  });
+
+  //Edit Order
+app.put("/admin/orders/:id", (req, res) => {
+    const sql = `
+    UPDATE orders
+    SET approved = ? 
+    WHERE id = ?
+    `;
+    con.query(sql, [req.body.approved, req.params.id], (err, result) => {
+        if (err) throw err;
+        res.send({ result, msg: { text: 'OK, Cat updated. Now it is as new', type: 'success' } });
+    });
+  });
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
